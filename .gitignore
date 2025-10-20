@@ -1,0 +1,43 @@
+# --- Python ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pkl
+*.egg-info/
+.env
+.venv
+venv/
+ENV/
+env/
+.ipynb_checkpoints/
+.DS_Store
+
+# --- Jupyter Notebook Autosaves ---
+*.ipynb_checkpoints
+*.ipynb_autosave
+
+# --- Logs ---
+*.log
+logs/
+*.out
+
+# --- Data Files ---
+NBA_Project_Data/*.csv
+*.zip
+*.tar
+*.gz
+
+# --- IDE & System Files ---
+.vscode/
+.idea/
+*.swp
+*.swo
+Thumbs.db
+.DS_Store
+
+# --- Output / Generated Artifacts ---
+artifacts/
+output/
+*.html
+*.pdf
