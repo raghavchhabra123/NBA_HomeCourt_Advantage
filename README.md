@@ -1,5 +1,5 @@
 # NBA Home Court Advantage Prediction
-[![View Notebook](https://img.shields.io/badge/Open%20in%20nbviewer-orange?logo=jupyter)](https://nbviewer.org/github/raghavchhabra123/NBA_HomeCourt_Advantage/blob/main/PredictNBAGamesProject.ipynb)
+[![View Notebook](https://img.shields.io/badge/Open%20in%20nbviewer-orange?logo=jupyter)](https://nbviewer.org/github/raghavchhabra123/NBA_HomeCourt_Advantage/blob/main/PredictNBAHomeGamesProject.ipynb)
 
 **Goal:**  
 Build a **leak-free machine learning pipeline** that predicts the **probability of an NBA home team winning** using only **pre-game data** such as recent form, rest days, and standings.
@@ -8,7 +8,18 @@ Build a **leak-free machine learning pipeline** that predicts the **probability 
 
 ## Project Overview
 This project demonstrates how time-aware feature engineering and leak-free modeling can simulate realistic NBA forecasting.  
-All features are created using only data available *before tipoff*, ensuring the model never “cheats” with post-game stats.
+All features are created using only data available *before tipoff*, ensuring the model never "cheats" with post-game stats.
+
+---
+
+## Results
+
+| Model | Accuracy | ROC-AUC | PR-AUC | Brier Score |
+|---|---|---|---|---|
+| XGBoost | **77.9%** | **0.852** | **0.873** | 0.157 |
+| Random Forest | 75.9% | 0.844 | 0.862 | 0.162 |
+| Logistic Regression | 76.4% | 0.844 | 0.861 | 0.163 |
+| Dummy Baseline | 55.0% | 0.500 | 0.550 | 0.450 |
 
 ---
 
@@ -16,7 +27,7 @@ All features are created using only data available *before tipoff*, ensuring the
 - Data cleaning and merging (`games.csv`, `ranking.csv`, `teams.csv`)
 - Rolling win rates, rest-day, and home-frequency feature engineering
 - Chronological train/test split to prevent data leakage
-- Classification models: Logistic Regression, Decision Tree, Random Forest, XGBoost
+- Classification models: Logistic Regression, Random Forest, XGBoost
 - Metrics: Accuracy, ROC-AUC, PR-AUC, Brier Score, and Calibration
 
 ---
@@ -24,18 +35,20 @@ All features are created using only data available *before tipoff*, ensuring the
 ## Key Insights
 - Teams with stronger **recent form** and higher **pre-game win %** are most likely to win at home  
 - **Rest advantage** has a measurable but smaller effect  
-- The model achieved strong **ROC-AUC (~0.70)** with realistic calibration  
+- XGBoost achieved the best performance with **77.9% accuracy** and **ROC-AUC of 0.852**  
+- The most predictive feature was `diff_rank_W_PCT_pre` (difference in pre-game win percentage)
 
 ---
 
 ## Skills Demonstrated
-`Python` · `Machine Learning` · `Feature Engineering` · `Scikit-Learn` · `Sports Analytics` · `Data Visualization`
+`Python` · `Machine Learning` · `Feature Engineering` · `Scikit-Learn` · `XGBoost` · `Sports Analytics` · `Data Visualization`
 
 ---
 
 ## Files
-- `PredictNBAGamesProject.ipynb` — main notebook  
+- `PredictNBAHomeGamesProject.ipynb` — main notebook  
 - `NBA_Project_Data/` — data sources  
+- `requirements.txt` — dependencies  
 - `README.md` — project overview and documentation
 
 ---
