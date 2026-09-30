@@ -1,3 +1,7 @@
+> **Historical project — see the [current NBA Matchup Predictor](https://github.com/raghavchhabra123/nba-matchup-predictor) for the maintained portfolio project.**
+>
+> This repository preserves an earlier exploratory notebook and its original reported results. The 77.9% figure below is from that earlier experiment; it is **not** the current model's holdout accuracy and the two experiments are not directly comparable. The current repository contains a different pipeline with a saved 68.2% holdout result, evaluation code, and explicit limitations. Original evaluation claims below should be read as historical documentation, not a new independent validation.
+
 # NBA Home Court Advantage Prediction
 [![View Notebook](https://img.shields.io/badge/Open%20in%20nbviewer-orange?logo=jupyter)](https://nbviewer.org/github/raghavchhabra123/NBA_HomeCourt_Advantage/blob/main/PredictNBAHomeGamesProject.ipynb)
 
