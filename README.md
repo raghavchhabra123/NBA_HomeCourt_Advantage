@@ -1,63 +1,24 @@
-> **Historical project — see the [current NBA Matchup Predictor](https://github.com/raghavchhabra123/nba-matchup-predictor) for the maintained portfolio project.**
->
-> This repository preserves an earlier exploratory notebook and its original reported results. The 77.9% figure below is from that earlier experiment; it is **not** the current model's holdout accuracy and the two experiments are not directly comparable. The current repository contains a different pipeline with a saved 68.2% holdout result, evaluation code, and explicit limitations. Original evaluation claims below should be read as historical documentation, not a new independent validation.
+# NBA Home Court Advantage — historical experiment
 
-# NBA Home Court Advantage Prediction
-[![View Notebook](https://img.shields.io/badge/Open%20in%20nbviewer-orange?logo=jupyter)](https://nbviewer.org/github/raghavchhabra123/NBA_HomeCourt_Advantage/blob/main/PredictNBAHomeGamesProject.ipynb)
+**This notebook is retained for learning and historical context. Its reported 77.9% accuracy is contaminated by target leakage and must not be presented as pre-game forecasting performance.**
 
-**Goal:**  
-Build a **leak-free machine learning pipeline** that predicts the **probability of an NBA home team winning** using only **pre-game data** such as recent form, rest days, and standings.
+Use the maintained [NBA Matchup Predictor](https://github.com/raghavchhabra123/nba-matchup-predictor) for the current project and its reproducible chronological evaluation. These are different experiments, not directly comparable model scores.
 
----
+## What the audit found
 
-## Project Overview
-This project demonstrates how time-aware feature engineering and leak-free modeling can simulate realistic NBA forecasting.  
-All features are created using only data available *before tipoff*, ensuring the model never "cheats" with post-game stats.
+- The standings join uses `allow_exact_matches=True`, so a game can receive its own end-of-day standings. In the committed CSVs, after game-ID and team/date standings deduplication, 24,770 home games had a one-game standings change from the preceding day. Every one of those changes matched that day's result. This directly exposes target information through `W_PCT`.
+- Missing feature values are filled with medians computed before the train/test split, allowing future data to influence training inputs.
+- The notebook chooses the best model using its test results and inspects feature importance on that same test set. It therefore lacks an untouched final evaluation.
+- A chronological split alone does not repair these feature-level leakage paths.
 
----
+The notebook and its outputs are preserved as an archival experiment, **not a validated benchmark**. The original “leak-free” characterization is withdrawn. A corrected run would need strictly prior-day standings, training-only imputation, temporal model selection and newly generated metrics. No corrected 77.9% result is claimed.
 
-## Results
+## Historical contents
 
-| Model | Accuracy | ROC-AUC | PR-AUC | Brier Score |
-|---|---|---|---|---|
-| XGBoost | **77.9%** | **0.852** | **0.873** | 0.157 |
-| Random Forest | 75.9% | 0.844 | 0.862 | 0.162 |
-| Logistic Regression | 76.4% | 0.844 | 0.861 | 0.163 |
-| Dummy Baseline | 55.0% | 0.500 | 0.550 | 0.450 |
+- `PredictNBAHomeGamesProject.ipynb`: cleaning, feature construction, exploratory model comparisons and plots.
+- `NBA_Project_Data/`: original data snapshots.
+- `requirements.txt`: broad historical dependencies, not a locked reproduction environment.
 
----
+[View the archived notebook](https://nbviewer.org/github/raghavchhabra123/NBA_HomeCourt_Advantage/blob/main/PredictNBAHomeGamesProject.ipynb)
 
-## Methods
-- Data cleaning and merging (`games.csv`, `ranking.csv`, `teams.csv`)
-- Rolling win rates, rest-day, and home-frequency feature engineering
-- Chronological train/test split to prevent data leakage
-- Classification models: Logistic Regression, Random Forest, XGBoost
-- Metrics: Accuracy, ROC-AUC, PR-AUC, Brier Score, and Calibration
-
----
-
-## Key Insights
-- Teams with stronger **recent form** and higher **pre-game win %** are most likely to win at home  
-- **Rest advantage** has a measurable but smaller effect  
-- XGBoost achieved the best performance with **77.9% accuracy** and **ROC-AUC of 0.852**  
-- The most predictive feature was `diff_rank_W_PCT_pre` (difference in pre-game win percentage)
-
----
-
-## Skills Demonstrated
-`Python` · `Machine Learning` · `Feature Engineering` · `Scikit-Learn` · `XGBoost` · `Sports Analytics` · `Data Visualization`
-
----
-
-## Files
-- `PredictNBAHomeGamesProject.ipynb` — main notebook  
-- `NBA_Project_Data/` — data sources  
-- `requirements.txt` — dependencies  
-- `README.md` — project overview and documentation
-
----
-
-## Next Steps
-- Incorporate Elo ratings or Vegas odds for richer pre-game context  
-- Add player-level features (injuries, travel fatigue)  
-- Explore rolling-origin cross-validation for time-series tuning
+The maintained project replaces this headline with training-only evaluation, explicit baselines, per-season scores, rolling development folds, regression tests and documented data limitations.
